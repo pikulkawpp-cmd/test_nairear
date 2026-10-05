@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบวิชารัฐศาสตร์และกฎหมาย</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas สำหรับจับภาพหน้าจอผลลัพธ์ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- หน้าแรก: เริ่มต้นทำแบบทดสอบ -->
+        <div id="welcome-screen" class="screen active">
+            <div class="card welcome-card">
+                <div class="icon-header">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h1>แบบทดสอบวิชารัฐศาสตร์และกฎหมาย</h1>
+                <p>แบบทดสอบประเมินความรู้ จำนวน 30 ข้อ<br>เกณฑ์ผ่าน: <strong>18 คะแนนขึ้นไป</strong> (60%)</p>
+                <div class="rules-box">
+                    <ul>
+                        <li><i class="fa-solid fa-circle-check"></i> ข้อสอบแบบปรนัย 4 ตัวเลือก (A, B, C, D)</li>
+                        <li><i class="fa-solid fa-circle-check"></i> สามารถเลือกตอบและเปลี่ยนข้อได้ก่อนกดยืนยัน</li>
+                        <li><i class="fa-solid fa-circle-check"></i> เมื่อส่งคำสอบจะแสดงผลคะแนนและสถานะทันที</li>
+                    </ul>
+                </div>
+                <button id="start-btn" class="btn primary-btn">
+                    <i class="fa-solid fa-play"></i> เริ่มทำแบบทดสอบ
+                </button>
+            </div>
+        </div>
+
+        <!-- หน้าที่ 2: ทำแบบทดสอบ -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="question-counter">ข้อที่ 1 / 30</span>
+                </div>
+                <div class="timer-box">
+                    <i class="fa-regular fa-clock"></i> <span id="timer">00:00</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div class="card quiz-card">
+                <h2 id="question-text">คำถามจะแสดงที่นี่...</h2>
+                <div id="options-container" class="options-container">
+                    <!-- ตัวเลือกจะถูกสร้างด้วย JavaScript -->
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="prev-btn" class="btn secondary-btn" disabled>
+                    <i class="fa-solid fa-arrow-left"></i> ข้อก่อนหน้า
+                </button>
+                <button id="next-btn" class="btn primary-btn">
+                    ข้อถัดไป <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- หน้าที่ 3: ผลการสอบ -->
+        <div id="result-screen" class="screen">
+            <div class="card result-card" id="capture-area">
+                <div id="result-badge" class="result-badge">
+                    <i id="result-icon" class="fa-solid fa-trophy"></i>
+                </div>
+                <h2 id="result-title">ผลการประเมิน</h2>
+                <div class="score-display">
+                    <span id="score-number">0</span><span class="score-total">/30</span>
+                </div>
+                <p id="result-message" class="result-message">กำลังประเมินผล...</p>
+                
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">คิดเป็นร้อยละ</span>
+                        <span id="stat-percent" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">เกณฑ์ผ่าน</span>
+                        <span class="stat-value">18 คะแนน</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button id="restart-btn" class="btn secondary-btn">
+                    <i class="fa-solid fa-rotate-right"></i> เริ่มทำใหม่
+                </button>
+                <button id="download-btn" class="btn primary-btn">
+                    <i class="fa-solid fa-download"></i> ดาวน์โหลดรูปผลสอบ
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
