@@ -286,8 +286,8 @@ body {
 
 .result-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     background: #f8fafc;
     padding: 15px;
     border-radius: 12px;
@@ -305,7 +305,7 @@ body {
 }
 
 .stat-value {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--primary-dark);
 }

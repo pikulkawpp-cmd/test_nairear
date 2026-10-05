@@ -325,6 +325,7 @@ const optionsContainer = document.getElementById('options-container');
 
 const scoreNumber = document.getElementById('score-number');
 const statPercent = document.getElementById('stat-percent');
+const statTime = document.getElementById('stat-time');
 const resultTitle = document.getElementById('result-title');
 const resultMessage = document.getElementById('result-message');
 const resultBadge = document.getElementById('result-badge');
@@ -420,6 +421,13 @@ function finishQuiz() {
     clearInterval(timerInterval);
     quizScreen.classList.remove('active');
     resultScreen.classList.add('active');
+
+    // คำนวณเวลาที่ใช้ทั้งหมด
+    let finalMins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+    let finalSecs = (secondsElapsed % 60).toString().padStart(2, '0');
+    if (statTime) {
+        statTime.textContent = `${finalMins}:${finalSecs}`;
+    }
 
     // คำนวณคะแนน
     let score = 0;
