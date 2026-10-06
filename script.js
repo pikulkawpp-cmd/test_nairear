@@ -479,12 +479,26 @@ function downloadResultImage() {
     });
 }
 
-// ฟังก์ชันเปิดโหมดผู้ดูแลระบบ
-// ฟังก์ชันเปิดโหมดผู้ดูแลระบบ (รองรับการตั้งค่าคะแนนเต็ม 30 หน้าผลลัพธ์)
+// เมื่อคลิกปุ่มผู้ดูแลระบบ ให้แสดงป๊อปอัปกรอกรหัสผ่าน
 function openAdminMode() {
-    let password = prompt("กรุณากรอกรหัสผ่านผู้ดูแลระบบ:");
+    const modal = document.getElementById('admin-modal');
+    const passwordInput = document.getElementById('admin-password-input');
+    passwordInput.value = ""; // ล้างค่าเก่า
+    modal.style.display = "flex";
+    passwordInput.focus();
+}
+
+// ปิดป๊อปอัป
+function closeAdminModal() {
+    document.getElementById('admin-modal').style.display = "none";
+}
+
+// ตรวจสอบรหัสผ่าน
+function verifyAdminPassword() {
+    let password = document.getElementById('admin-password-input').value;
     
-    if (password === "pikulkaw1122") {
+    if (password === "123987") {
+        closeAdminModal();
         let choice = prompt("เลือกหน้าต่างที่ต้องการตรวจสอบ:\n1 = หน้าแรก (Welcome)\n2 = หน้าทำข้อสอบ (Quiz)\n3 = หน้าผลการสอบ (Result - ปกติ)\n4 = หน้าผลการสอบ (จำลองคะแนนเต็ม 30/30 คะแนน)");
         
         // ซ่อนทุกหน้าก่อน
@@ -502,12 +516,10 @@ function openAdminMode() {
             // โหมดพิเศษ: แสดงหน้า 3 พร้อมเซ็ตค่าคะแนนเต็ม 30 (ผ่านเกณฑ์)
             document.getElementById('result-screen').classList.add('active');
             
-            // ใส่คะแนน 30 / 30
             document.getElementById('score-number').innerText = "30";
             document.getElementById('stat-percent').innerText = "100%";
             document.getElementById('stat-time').innerText = "00:01";
             
-            // เปลี่ยนข้อความและป้ายสถานะเป็นผ่าน
             document.getElementById('result-title').innerText = "ผลการประเมิน";
             document.getElementById('result-message').innerText = "ยอดเยี่ยม! คุณผ่านเกณฑ์การประเมิน";
             
@@ -515,10 +527,22 @@ function openAdminMode() {
             badge.className = "result-badge pass";
             let icon = document.getElementById('result-icon');
             icon.className = "fa-solid fa-trophy";
-        } else {
-            alert("ตัวเลือกไม่ถูกต้อง");
         }
-    } else if (password !== null) {
+    } else {
         alert("รหัสผ่านไม่ถูกต้อง!");
+        document.getElementById('admin-password-input').value = "";
+        document.getElementById('admin-password-input').focus();
     }
 }
+
+// รองรับการกดปุ่ม Enter เพื่อยืนยันรหัสผ่านทันที
+document.addEventListener("DOMContentLoaded", () => {
+    const passwordInput = document.getElementById('admin-password-input');
+    if (passwordInput) {
+        passwordInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                verifyAdminPassword();
+            }
+        });
+    }
+});

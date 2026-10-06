@@ -17,6 +17,18 @@
 <button onclick="openAdminMode()" class="admin-float-btn">
     <i class="fa-solid fa-shield-halved"></i> ผู้ดูแลระบบ
 </button>
+<!-- ป๊อปอัปสำหรับกรอกรหัสผ่านผู้ดูแลระบบ -->
+<div id="admin-modal" class="admin-modal-overlay">
+    <div class="admin-modal-card">
+        <h3><i class="fa-solid fa-shield-halved"></i> ยืนยันสิทธิ์ผู้ดูแลระบบ</h3>
+        <p>กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบ</p>
+        <input type="password" id="admin-password-input" placeholder="กรอกรหัสผ่าน..." autocomplete="current-password">
+        <div class="admin-modal-actions">
+            <button onclick="closeAdminModal()" class="btn secondary-btn">ยกเลิก</button>
+            <button onclick="verifyAdminPassword()" class="btn primary-btn">ยืนยัน</button>
+        </div>
+    </div>
+</div>
 
     <div class="app-container">
         
