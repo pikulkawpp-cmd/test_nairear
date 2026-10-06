@@ -480,11 +480,12 @@ function downloadResultImage() {
 }
 
 // ฟังก์ชันเปิดโหมดผู้ดูแลระบบ
+// ฟังก์ชันเปิดโหมดผู้ดูแลระบบ (รองรับการตั้งค่าคะแนนเต็ม 30 หน้าผลลัพธ์)
 function openAdminMode() {
     let password = prompt("กรุณากรอกรหัสผ่านผู้ดูแลระบบ:");
     
     if (password === "123987") {
-        let choice = prompt("เลือกหน้าต่างที่ต้องการตรวจสอบ:\n1 = หน้าแรก (Welcome)\n2 = หน้าทำข้อสอบ (Quiz)\n3 = หน้าผลการสอบ (Result)");
+        let choice = prompt("เลือกหน้าต่างที่ต้องการตรวจสอบ:\n1 = หน้าแรก (Welcome)\n2 = หน้าทำข้อสอบ (Quiz)\n3 = หน้าผลการสอบ (Result - ปกติ)\n4 = หน้าผลการสอบ (จำลองคะแนนเต็ม 30/30 คะแนน)");
         
         // ซ่อนทุกหน้าก่อน
         const screens = document.querySelectorAll('.screen');
@@ -497,9 +498,25 @@ function openAdminMode() {
             document.getElementById('quiz-screen').classList.add('active');
         } else if (choice === "3") {
             document.getElementById('result-screen').classList.add('active');
+        } else if (choice === "4") {
+            // โหมดพิเศษ: แสดงหน้า 3 พร้อมเซ็ตค่าคะแนนเต็ม 30 (ผ่านเกณฑ์)
+            document.getElementById('result-screen').classList.add('active');
+            
+            // ใส่คะแนน 30 / 30
+            document.getElementById('score-number').innerText = "30";
+            document.getElementById('stat-percent').innerText = "100%";
+            document.getElementById('stat-time').innerText = "00:01";
+            
+            // เปลี่ยนข้อความและป้ายสถานะเป็นผ่าน
+            document.getElementById('result-title').innerText = "ผลการประเมิน";
+            document.getElementById('result-message').innerText = "ยอดเยี่ยม! คุณผ่านเกณฑ์การประเมิน";
+            
+            let badge = document.getElementById('result-badge');
+            badge.className = "result-badge pass";
+            let icon = document.getElementById('result-icon');
+            icon.className = "fa-solid fa-trophy";
         } else {
             alert("ตัวเลือกไม่ถูกต้อง");
-            // คืนค่ากลับมาหน้าปัจจุบัน (ถ้าเลือกผิด) หรือปล่อยไว้ตามสะดวก
         }
     } else if (password !== null) {
         alert("รหัสผ่านไม่ถูกต้อง!");
