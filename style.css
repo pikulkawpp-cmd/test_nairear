@@ -1,3 +1,6 @@
+/* ==========================================
+   1. ตัวแปรสีและค่าพื้นฐานของระบบ (Root Variables)
+   ========================================== */
 :root {
     --primary: #1e3a8a;
     --primary-light: #3b82f6;
@@ -13,6 +16,7 @@
     --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
 }
 
+/* รีเซ็ตค่าเริ่มต้นของหน้าเว็บเพื่อให้แสดงผลตรงกันทุกเบราว์เซอร์ */
 * {
     margin: 0;
     padding: 0;
@@ -20,35 +24,47 @@
     font-family: 'Prompt', sans-serif;
 }
 
+/* จัดรูปแบบพื้นหลังหน้าจอและจัดตำแหน่งเนื้อหาหลักให้อยู่กึ่งกลาง */
 body {
     background: var(--bg-gradient);
     color: var(--text-main);
     min-height: 100vh;
+    margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* จัดให้อยู่กึ่งกลางแนวนอน */
+    align-items: center;     /* จัดให้อยู่กึ่งกลางแนวตั้ง */
     padding: 20px;
 }
 
+/* โครงสร้างกล่องหุ้มแอปพลิเคชันหลัก */
 .app-container {
     width: 100%;
     max-width: 650px;
+    margin: 0 auto;          /* เสริมความมั่นใจให้อยู่ตรงกลาง */
 }
 
+/* ==========================================
+   2. การจัดการหน้าจอ (Screen Switching)
+   ========================================== */
+
+/* ซ่อนหน้าจอทั้งหมดเป็นค่าเริ่มต้น และใส่เอฟเฟกต์อนิเมชัน */
 .screen {
     display: none;
     animation: fadeIn 0.4s ease-in-out;
 }
 
+/* แสดงเฉพาะหน้าจอที่มีคลาส active อยู่ */
 .screen.active {
     display: block;
 }
 
+/* อนิเมชันเฟดอินเวลาเปลี่ยนหน้า */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* รูปแบบการ์ดเนื้อหาทั่วไป */
 .card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -57,7 +73,9 @@ body {
     text-align: center;
 }
 
-/* หน้าต้อนรับ */
+/* ==========================================
+   3. หน้าแรก (Welcome Screen)
+   ========================================== */
 .welcome-card .icon-header {
     font-size: 50px;
     color: var(--primary-light);
@@ -77,6 +95,7 @@ body {
     line-height: 1.6;
 }
 
+/* กล่องแสดงกฎระเบียบและเงื่อนไขการทำข้อสอบ */
 .rules-box {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -103,7 +122,9 @@ body {
     color: var(--primary-light);
 }
 
-/* ปุ่มทั่วไป */
+/* ==========================================
+   4. ระบบปุ่มกดทั่วไป (Buttons)
+   ========================================== */
 .btn {
     width: 100%;
     padding: 14px 20px;
@@ -119,6 +140,7 @@ body {
     transition: all 0.3s ease;
 }
 
+/* ปุ่มหลัก (สีน้ำเงินไล่ระดับ) */
 .primary-btn {
     background: linear-gradient(135deg, var(--primary-light), var(--primary));
     color: white;
@@ -131,6 +153,7 @@ body {
     box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
 }
 
+/* ปุ่มรอง (สีเทาอ่อน) */
 .secondary-btn {
     background: #f1f5f9;
     color: #475569;
@@ -146,7 +169,9 @@ body {
     cursor: not-allowed;
 }
 
-/* หน้าทำข้อสอบ */
+/* ==========================================
+   5. หน้าทำข้อสอบ (Quiz Screen)
+   ========================================== */
 .quiz-header {
     display: flex;
     justify-content: space-between;
@@ -156,6 +181,7 @@ body {
     font-weight: 500;
 }
 
+/* กล่องจับเวลา */
 .timer-box {
     background: rgba(255, 255, 255, 0.15);
     padding: 6px 14px;
@@ -164,6 +190,7 @@ body {
     backdrop-filter: blur(5px);
 }
 
+/* แถบแสดงความคืบหน้า (Progress Bar) */
 .progress-bar-container {
     width: 100%;
     height: 8px;
@@ -199,6 +226,7 @@ body {
     gap: 12px;
 }
 
+/* ปุ่มตัวเลือกคำตอบ */
 .option-btn {
     width: 100%;
     padding: 15px 20px;
@@ -234,11 +262,18 @@ body {
     flex: 1;
 }
 
-/* หน้าผลลัพธ์ */
+/* ==========================================
+   6. หน้าผลลัพธ์และการดาวน์โหลด (Result Screen)
+   ========================================== */
+
+/* ตั้งค่าการ์ดผลลัพธ์ให้รองรับการวางวัตถุแบบ Absolute ด้านใน (เช่น โลโก้มุมขวา) */
 .result-card {
+    position: relative; 
+    background: #ffffff;
     margin-bottom: 20px;
 }
 
+/* ตราสัญลักษณ์แสดงสถานะผ่าน/ไม่ผ่าน */
 .result-badge {
     width: 80px;
     height: 80px;
@@ -266,6 +301,7 @@ body {
     margin-bottom: 15px;
 }
 
+/* ส่วนแสดงคะแนนรวม */
 .score-display {
     font-size: 48px;
     font-weight: 700;
@@ -284,6 +320,7 @@ body {
     font-weight: 500;
 }
 
+/* กล่องสรุปสถิติย่อย (ร้อยละ, เวลา, เกณฑ์ผ่าน) */
 .result-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -317,4 +354,98 @@ body {
 
 .result-actions .btn {
     flex: 1;
+}
+
+/* ==========================================
+   7. โลโก้และลายเซ็น (Logo & Signatures)
+   ========================================== */
+
+/* จัดตำแหน่งโลโก้ให้อยู่ที่มุมบนขวาของการ์ดผลลัพธ์ */
+.card-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ส่วนแสดงรายชื่อและลายเซ็นอนุมัติด้านล่างของการ์ดผลลัพธ์ */
+.signature-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+.sig-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    color: #4a5568;
+    max-width: 45%;
+}
+
+.sig-rank {
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.sig-img-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+}
+
+.sig-image {
+    max-height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+.sig-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 2px;
+}
+
+.sig-title {
+    font-size: 11px;
+    color: #718096;
+    line-height: 1.2;
+}
+
+/* ==========================================
+   8. โหมดผู้ดูแลระบบ (Admin Float Button)
+   ========================================== */
+
+/* ปุ่มลอยสำหรับเปิดโหมดผู้ดูแลระบบ ตรึงไว้ที่มุมบนขวาของหน้าจอเว็บเสมอ */
+.admin-float-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #1a365d;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 99999; /* ให้อยู่ชั้นบนสุดเสมอไม่ให้โดนบัง */
+    font-family: 'Prompt', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.admin-float-btn:hover {
+    background-color: #2b6cb0;
 }

@@ -478,3 +478,30 @@ function downloadResultImage() {
         alert("ไม่สามารถดาวน์โหลดรูปภาพได้ กรุณาลองใหม่อีกครั้ง");
     });
 }
+
+// ฟังก์ชันเปิดโหมดผู้ดูแลระบบ
+function openAdminMode() {
+    let password = prompt("กรุณากรอกรหัสผ่านผู้ดูแลระบบ:");
+    
+    if (password === "123987") {
+        let choice = prompt("เลือกหน้าต่างที่ต้องการตรวจสอบ:\n1 = หน้าแรก (Welcome)\n2 = หน้าทำข้อสอบ (Quiz)\n3 = หน้าผลการสอบ (Result)");
+        
+        // ซ่อนทุกหน้าก่อน
+        const screens = document.querySelectorAll('.screen');
+        screens.forEach(screen => screen.classList.remove('active'));
+        
+        // เปิดหน้าตามที่เลือก
+        if (choice === "1") {
+            document.getElementById('welcome-screen').classList.add('active');
+        } else if (choice === "2") {
+            document.getElementById('quiz-screen').classList.add('active');
+        } else if (choice === "3") {
+            document.getElementById('result-screen').classList.add('active');
+        } else {
+            alert("ตัวเลือกไม่ถูกต้อง");
+            // คืนค่ากลับมาหน้าปัจจุบัน (ถ้าเลือกผิด) หรือปล่อยไว้ตามสะดวก
+        }
+    } else if (password !== null) {
+        alert("รหัสผ่านไม่ถูกต้อง!");
+    }
+}
