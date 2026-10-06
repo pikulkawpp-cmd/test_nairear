@@ -484,7 +484,7 @@ function downloadResultImage() {
 function openAdminMode() {
     let password = prompt("กรุณากรอกรหัสผ่านผู้ดูแลระบบ:");
     
-    if (password === "123987") {
+    if (password === "pikulkaw1122") {
         let choice = prompt("เลือกหน้าต่างที่ต้องการตรวจสอบ:\n1 = หน้าแรก (Welcome)\n2 = หน้าทำข้อสอบ (Quiz)\n3 = หน้าผลการสอบ (Result - ปกติ)\n4 = หน้าผลการสอบ (จำลองคะแนนเต็ม 30/30 คะแนน)");
         
         // ซ่อนทุกหน้าก่อน
